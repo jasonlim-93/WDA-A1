@@ -104,6 +104,21 @@
 			
 		}
 	}
+	
+	function display_error()
+	{
+		print '<table>
+		
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> Validation error detected ! </td> </tr>
+					
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> There are a few of the reasons , you see this screen is because : </td> </tr>
+					
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 1. One of the search field is left empty .</td> </tr>
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 2. The maximum price is more than the minimum price .</td> </tr>
+		    <tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 3. The maximum number of customer purchased is more than the minimum number of customer purchased .</td> </tr>
+					
+			</table>';
+	}
 		$template->show();
 		$conn->disconnect();
 ?>		
