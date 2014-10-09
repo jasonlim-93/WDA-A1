@@ -10,12 +10,12 @@
       die("Error " . mysql_errno() . " : " . mysql_error());
    }
 
-   function mysqlclean($array, $index, $maxlength, $connection)
+   function mysqlclean($array, $index, $maxlength, $conn)
    {
      if (isset($array["{$index}"]))
      {
         $input = substr($array["{$index}"], 0, $maxlength);
-        $input = mysql_real_escape_string($input, $connection);
+        $input = mysql_real_escape_string($input, $conn);
         return ($input);
      }
      return NULL;
