@@ -5,43 +5,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Jason's Wine Store : Results </title>
-	<style>	
-	input[type='text']
-	{
-	font-family:Lucida Console;
-	}
-	
-	input:focus 
-	{
-    border-color: #0000CC;
-	}
-	
-	td
-	{	
-		font-family:Lucida Console;
-		padding: 12px;
-	}
-	
-	table
-	{
-		align: center;
-		margin: auto;
-		border: 1px ridge #9900CC;;
-		padding: 3px;
-	}
-	</style>
 </head>
-<body>
-	<table width="1200px">
-		<tr>
-			<td align="center">
-				<img src ="wine_logo.jpg" alt="Wine store logo"
-				style="width:450px; height:235px; "/>
-			</td>
-		</tr>
-		
-	</table>
+
+<?php
 	
-	</body>
-	</html>
+	set_include_path('C:/wamp/bin/php/php5.4.16/pear');
+	require_once "HTML/Template/IT.php";
+	
+	require 'wine_db.inc';
+	
+	$winename = $_GET['winename'];
+	$wineryname = $_GET['wineryname'];
+	$region = $_GET['region'];
+	$year_start = $_GET['year_start'];
+	$year_end = $_GET['year_end'];
+	$stock = $_GET['stock'];
+	$customer = $_GET['customer'];
+	$price_min = $_GET['price_min'];
+	$price_max = $_GET['price_max'];
+	
+	
+?>
+</body>
+</html>
+
 	
