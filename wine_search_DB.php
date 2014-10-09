@@ -85,7 +85,13 @@
 	
 	if($year_end <= $year_start || $price_max <= $price_min)
 		{	
-			
+			$template->setCurrentBlock("validation_error");
+			$template->setVariable("print_error_msg_line_1", $error_line_1 );
+			$template->setVariable("print_error_msg_line_2", $error_line_2 );
+			$template->setVariable("print_error_msg_line_3", $error_line_3 );
+			$template->setVariable("print_error_msg_line_4", $error_line_4 );
+			$template->setVariable("print_error_msg_line_5", $error_line_5 );
+			$template->parseCurrentBlock();	
 		}
 		
 		else if ($row_found==0)
@@ -97,27 +103,31 @@
 		
 		else
 		{
-			
+			$template->setCurrentBlock("found");
+			$template->setVariable("print_found_line_0", $found_line_0);
+			$template->setVariable("print_found_line_1", $found_line_1);
+			$template->setVariable("print_found_line_2", $found_line_2);
+			$template->setVariable("print_found_line_3", $found_line_3);
+			$template->setVariable("print_found_line_4", $found_line_4);
+			$template->setVariable("print_found_line_5", $found_line_5);
+			$template->setVariable("print_found_line_6", $found_line_6);
+			$template->setVariable("print_found_line_7", $found_line_7);
+			$template->setVariable("print_found_line_8", $found_line_8);
+			$template->parseCurrentBlock();
 			
 		while ($row = $query ->fetchRow(DB_FETCHMODE_ASSOC))
 		{
-			
+			$template->setCurrentBlock("results");
+			$template->setVariable("wine_name", $row["wine_name"]);
+			$template->setVariable("variety", $row["variety"]);
+			$template->setVariable("year", $row["year"]);
+			$template->setVariable("winery_name", $row["winery_name"]);
+			$template->setVariable("region_name", $row["region_name"]);
+			$template->setVariable("cost", $row["cost"]);
+			$template->setVariable("on_hand", $row["on_hand"]);
+			$template->setVariable("total", $row["total"]);
+			$template->parseCurrentBlock();
 		}
-	}
-	
-	function display_error()
-	{
-		print '<table>
-		
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> Validation error detected ! </td> </tr>
-					
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> There are a few of the reasons , you see this screen is because : </td> </tr>
-					
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 1. One of the search field is left empty .</td> </tr>
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 2. The maximum price is more than the minimum price .</td> </tr>
-		    <tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 3. The maximum number of customer purchased is more than the minimum number of customer purchased .</td> </tr>
-					
-			</table>';
 	}
 		$template->show();
 		$conn->disconnect();
