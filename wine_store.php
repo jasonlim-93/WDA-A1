@@ -6,8 +6,20 @@
 	<meta charset="UTF-8">
 	<title>Jason's Wine Store </title>
 	<style>	
-	td
+	
+	input[type='text']
 	{
+	font-family:Lucida Console;
+	}
+	
+	input:focus 
+	{
+    border-color: #0000CC;
+	}
+	
+	td
+	{	
+		font-family:Lucida Console;
 		padding: 12px;
 	}
 	
@@ -15,7 +27,7 @@
 	{
 		align: center;
 		margin: auto;
-		border: 1px ridge gray;
+		border: 1px ridge #9900CC;;
 		padding: 3px;
 	}
 	
