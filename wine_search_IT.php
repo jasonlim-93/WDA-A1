@@ -56,7 +56,21 @@
 		
 					having (total >= '".$customer."') ";
 					
-	
+	$error_line_1 = " Validation error detected !";
+	$error_line_2 = " There are a few of the reasons , you see this screen is because :";
+	$error_line_3 = " 1. One of the search field is left empty .";
+	$error_line_4 = " 2. The maximum price is more than the minimum price .";
+	$error_line_5 = " 3. The maximum number of customer purchased is more than the minimum number of customer purchased .";
+	$not_found_line_1 = " The wine you are looking for is not found is our store database currently , please try again later .";
+	$found_line_0 = " Your search results is as below :";
+	$found_line_1 = "Wine Name";
+	$found_line_2 = "Wine Variety";
+	$found_line_3 = "Year";
+	$found_line_4 = "Winery";
+	$found_line_5 = "Region";
+	$found_line_6 = "Price";
+	$found_line_7 = "Number of Stock";
+	$found_line_8 = "Number of Customer";
 					
 	if (!($conn = @ mysql_connect($hostName, $username, $password)))
 			die("Fail to connect to the database");
@@ -74,36 +88,51 @@
 		if($year_end <= $year_start || $price_max <= $price_min)
 		
 		{	
-			
+			$template->setCurrentBlock("validation_error");
+			$template->setVariable("print_error_msg_line_1", $error_line_1 );
+			$template->setVariable("print_error_msg_line_2", $error_line_2 );
+			$template->setVariable("print_error_msg_line_3", $error_line_3 );
+			$template->setVariable("print_error_msg_line_4", $error_line_4 );
+			$template->setVariable("print_error_msg_line_5", $error_line_5 );
+			$template->parseCurrentBlock();	
 		}
 		
 		else if (mysql_num_rows($query) == 0)
 		{
-		
+			$template->setCurrentBlock("not_found");
+			$template->setVariable("print_not_found_msg_line_1", $not_found_line_1);	
+			$template->parseCurrentBlock();
 		}
 		
 		else
 		{
+			$template->setCurrentBlock("found");
+			$template->setVariable("print_found_line_0", $found_line_0);
+			$template->setVariable("print_found_line_1", $found_line_1);
+			$template->setVariable("print_found_line_2", $found_line_2);
+			$template->setVariable("print_found_line_3", $found_line_3);
+			$template->setVariable("print_found_line_4", $found_line_4);
+			$template->setVariable("print_found_line_5", $found_line_5);
+			$template->setVariable("print_found_line_6", $found_line_6);
+			$template->setVariable("print_found_line_7", $found_line_7);
+			$template->setVariable("print_found_line_8", $found_line_8);
+			$template->parseCurrentBlock();
 			
 		while ($row =  mysql_fetch_array($query))
-		
+		{
+			$template->setCurrentBlock("results");
+			$template->setVariable("wine_name", $row["wine_name"]);
+			$template->setVariable("variety", $row["variety"]);
+			$template->setVariable("year", $row["year"]);
+			$template->setVariable("winery_name", $row["winery_name"]);
+			$template->setVariable("region_name", $row["region_name"]);
+			$template->setVariable("cost", $row["cost"]);
+			$template->setVariable("on_hand", $row["on_hand"]);
+			$template->setVariable("total", $row["total"]);
+			$template->parseCurrentBlock();
+		}
 	}
 		$template->show();
-		
-		function display_error()
-	{
-		print '<table>
-		
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> Validation error detected ! </td> </tr>
-					
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> There are a few of the reasons , you see this screen is because : </td> </tr>
-					
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 1. One of the search field is left empty .</td> </tr>
-			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 2. The maximum price is more than the minimum price .</td> </tr>
-		    <tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 3. The maximum number of customer purchased is more than the minimum number of customer purchased .</td> </tr>
-					
-			</table>';
-	}
 ?>
 </body>
 </html>
