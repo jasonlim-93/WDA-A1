@@ -51,6 +51,39 @@
 			<tr> <td colspan="8" style="text-align:center; color:#0000CC;">{print_error_msg_line_4}</td> </tr>
 		    <tr> <td colspan="8" style="text-align:center; color:#0000CC;">{print_error_msg_line_5}</td> </tr>	
 		<!--  validation_error -->
+		
+		<!-- BEGIN not_found -->
+			<tr><td colspan="8" style="text-align:center; color:#0000CC;">
+				<br/>{print_not_found_msg_line_1} </td>
+			</tr>
+		<!-- END not_found -->
+		
+		<!-- BEGIN found -->
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> {print_found_line_0} </td> </tr>
+			<tr>
+				<th>{print_found_line_1}</th>
+				<th>{print_found_line_2}</th>
+				<th>{print_found_line_3}</th>
+				<th>{print_found_line_4}</th>
+				<th>{print_found_line_5}</th>
+				<th>{print_found_line_6}</th>
+				<th>{print_found_line_7}</th>
+				<th>{print_found_line_8}</th>
+			</tr>
+		<!-- END found -->		
+
+		<!-- BEGIN results -->
+			<tr>
+				<td> {wine_name} </td>
+				<td> {variety} </td>
+				<td> {year} </td>
+				<td> {winery_name} </td>
+				<td> {region_name} </td>
+				<td> {cost} </td>
+				<td> {on_hand} </td>
+				<td> {total} </td>
+			</tr>
+		<!-- END results -->
 
 	</table>
 	</body>
