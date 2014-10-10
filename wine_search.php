@@ -94,6 +94,38 @@
 			<th>Number of Customer</th>
 		</tr>';
 		
+		while ($row =  mysqli_fetch_array($query))
+		{
+			echo "<tr>";
+			echo "<td>".($row["wine_name"])."</td>";
+			echo "<td>".($row["variety"])."</td>";
+			echo "<td>".($row["year"])."</td>";
+			echo "<td>".($row["winery_name"])."</td>";
+			echo "<td>".($row["region_name"])."</td>";
+			echo "<td>".($row["cost"])."</td>";
+			echo "<td>".($row["on_hand"])."</td>";
+			echo "<td>".($row["total"])."</td>";
+			echo "</tr>";
+		}
+			print "</table>";
+		}
+	}
+	
+function display_error()
+	{
+		print '<table>
+		
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> Validation error detected ! </td> </tr>
+					
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> There are a few of the reasons , you see this screen is because : </td> </tr>
+					
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 1. One of the search field is left empty .</td> </tr>
+			<tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 2. The maximum price is more than the minimum price .</td> </tr>
+		    <tr> <td colspan="8" style="text-align:center; color:#0000CC;"> 3. The maximum number of customer purchased is more than the minimum number of customer purchased .</td> </tr>
+					
+			</table>';
+	}
+
 	if($year_start == null)
 	{
 		$year_start = 1970;
@@ -137,7 +169,7 @@
 
 		display_ok($query);
 	}
-
+	
 ?>
 
 </body>
