@@ -94,21 +94,48 @@
 			<th>Number of Customer</th>
 		</tr>';
 		
-		while ($row =  mysqli_fetch_array($query))
-		{
-			echo "<tr>";
-			echo "<td>".($row["wine_name"])."</td>";
-			echo "<td>".($row["variety"])."</td>";
-			echo "<td>".($row["year"])."</td>";
-			echo "<td>".($row["winery_name"])."</td>";
-			echo "<td>".($row["region_name"])."</td>";
-			echo "<td>".($row["cost"])."</td>";
-			echo "<td>".($row["on_hand"])."</td>";
-			echo "<td>".($row["total"])."</td>";
-			echo "</tr>";
-		}
-			print "</table>";
-		}
+	if($year_start == null)
+	{
+		$year_start = 1970;
+	}
+	
+	if($year_end == null)
+	{
+		$year_end = 1999;
+	}
+	
+	if($price_min == null)
+	{
+		$price_min = 0;
+	}
+	
+	if($price_max == null)
+	{
+		$price_max = 9999;
+	}
+	
+	if($year_end <= $year_start || $price_max <= $price_min)
+	{
+		display_error();
+	}
+	else
+	{
+		$result_all = "select wine_name, winery_name, variety, region_name, cost, on_hand, year, count(items.cust_id) as total
+						from wine, winery, items, region, inventory, grape_variety, wine_variety
+						where 
+		wine.wine_id = inventory.wine_id and wine.wine_id = wine_variety.wine_id and wine_variety.variety_id = grape_variety.variety_id and
+		wine.winery_id = winery.winery_id and winery.region_id = region.region_id and wine.wine_id = items.wine_id and wine_name like '%".$winename."%' and
+		winery_name like '%".$wineryname."%' and region_name like '%".$region."%' and on_hand >= '".$stock."' and (cost between '".$price_min."' and '".$price_max."') and
+		(year between '".$year_start."' and '".$year_end."')
+		
+		group by wine.wine_name,winery.winery_name, grape_variety.variety,region.region_name,wine.year,inventory.on_hand,inventory.cost
+		
+		having (total >= '".$customer."') ";
+	
+		$conn = mysqli_connect("localhost","root","","winestore");
+		$query = mysqli_query ($conn, $result_all);
+
+		display_ok($query);
 	}
 
 ?>
