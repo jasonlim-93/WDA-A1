@@ -5,7 +5,7 @@ Wine Store Project
 
 Final Submission 
 
-  Changelog:
+  Changelogs:
   
 -Fixed Bugs
 
